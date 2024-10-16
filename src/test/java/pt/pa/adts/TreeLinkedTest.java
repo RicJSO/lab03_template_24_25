@@ -1,5 +1,10 @@
 package pt.pa.adts;
 
+import javax.swing.tree.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 class TreeLinkedTest {
 
@@ -64,6 +69,11 @@ class TreeLinkedTest {
 
     @org.junit.jupiter.api.Test
     void children() {
+        ArrayList<Position<String>> list = new ArrayList<>();
+        list.add(mackerel);
+        list.add(barracuda);
+        assertEquals(list, tree.children(tuna));
+        assertThrows(InvalidPositionException.class, () -> tree.children(null));
     }
 
     @org.junit.jupiter.api.Test
@@ -106,6 +116,18 @@ class TreeLinkedTest {
 
     @org.junit.jupiter.api.Test
     void elements() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Ecosystem");
+        list.add("Anchovy");
+        list.add("Tuna");list.add("Mackerel");
+        list.add("Barracuda");
+        list.add("Sardine");
+        list.add("Shark");
+        list.add("Dolphin");
+        list.add("Eagles");
+        list.add("Snakes");
+        list.add("Rabbits");
+        assertEquals(list, tree.elements());
     }
 
     @org.junit.jupiter.api.Test
@@ -138,5 +160,13 @@ class TreeLinkedTest {
 
     @org.junit.jupiter.api.Test
     void testInsertThrowsInvalidPositionException() {
+        assertThrows(InvalidPositionException.class, () -> tree.insert(null, "test"));
+    }
+
+    @org.junit.jupiter.api.Test
+    void degree() {
+        assertEquals(4, tree.degree(tree.root()));
+        Position<String> testPos = tree.insert(tree.root(), "test");
+        assertEquals(5, tree.degree(tree.root()));
     }
 }

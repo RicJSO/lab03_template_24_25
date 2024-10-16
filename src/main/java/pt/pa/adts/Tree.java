@@ -158,5 +158,12 @@ public interface Tree<E> {
    */
   boolean isAncestor(Position<E> lowerItem, Position<E> upperItem);
 
+  /**
+   *
+   * @param position of the treeNode
+   * @return degree of node (position)
+   * @throws InvalidPositionException if position is null or is not referring to a treeNode
+   */
+  int degree(Position<E> position) throws InvalidPositionException;
 }
 
